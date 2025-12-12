@@ -8,9 +8,13 @@
 </head>
 <body>
     <div class="container">
-        <header>
-            <div class="logo">CYBER•GOMOKU</div>
-            <div id="connection-status" class="status-badge offline">OFFLINE</div>
+        <header style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <img id="my-avatar" src="" alt="Me" style="width: 32px; height: 32px; border-radius: 50%;">
+                <span id="my-name" style="color: #fff;"></span>
+                <span id="my-role" style="color: #888; font-size: 12px;"></span>
+            </div>
+            <div id="connection-status" class="offline" style="padding: 4px 8px; border-radius: 4px; font-size: 12px;">OFFLINE</div>
         </header>
 
         <main>
@@ -24,7 +28,7 @@
                     <div class="info">
                         <div class="name" id="name-black">WAITING...</div>
                         <div class="status" id="status-black"></div>
-                        <button id="btn-ready-black" class="cyber-btn hidden">READY</button>
+                        <button id="btn-ready-black" class="btn hidden">READY</button>
                     </div>
                 </div>
 
@@ -35,37 +39,26 @@
                     <div id="winner-modal" class="modal hidden">
                         <div class="modal-content">
                             <h2 id="winner-text">BLACK WINS</h2>
-                            <button id="btn-reset" class="cyber-btn">REMATCH</button>
+                            <button id="btn-reset" class="btn">REMATCH</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="player-panel right" id="player-white">
                     <div class="avatar-container">
+                        <div class="avatar-ring"></div>
                         <img src="" alt="White" class="avatar" id="avatar-white">
                         <div class="turn-indicator"></div>
                     </div>
                     <div class="info">
                         <div class="name" id="name-white">WAITING...</div>
                         <div class="status" id="status-white"></div>
-                        <button id="btn-ready-white" class="cyber-btn hidden">READY</button>
+                        <button id="btn-ready-white" class="btn hidden">READY</button>
                     </div>
                 </div>
             </div>
-            
-            <div class="spectator-area">
-                <h3>SPECTATORS</h3>
-                <ul id="spectator-list"></ul>
-            </div>
         </main>
 
-        <footer>
-            <div class="user-identity">
-                <img id="my-avatar" src="" alt="Me">
-                <span id="my-name">Identifying...</span>
-                <span id="my-role" class="role-badge">SPECTATOR</span>
-            </div>
-        </footer>
     </div>
 
     <script src="/socket.io/socket.io.js"></script>

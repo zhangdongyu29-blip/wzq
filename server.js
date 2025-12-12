@@ -60,7 +60,7 @@ io.on('connection', (socket) => {
     const user = {
         id: socket.id,
         name: clientIp,
-        avatar: `https://api.dicebear.com/7.x/bottts/svg?seed=${socket.id}&backgroundColor=b6e3f4`,
+        avatar: `https://api.dicebear.com/7.x/avataaars/svg?seed=${socket.id}`,
         ready: false,
         color: null // 'black' or 'white'
     };

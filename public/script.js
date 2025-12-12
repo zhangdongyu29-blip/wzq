@@ -49,12 +49,19 @@ function initBoard() {
 }
 
 function handleCellClick(row, col) {
-    if (gameStatus !== 'playing') return;
-    if (myColor !== currentTurn) return;
+    console.log('Click:', { gameStatus, myColor, currentTurn });
+    if (gameStatus !== 'playing') {
+        console.log('Game not playing, status:', gameStatus);
+        return;
+    }
+    if (myColor !== currentTurn) {
+        console.log('Not my turn:', myColor, 'vs', currentTurn);
+        return;
+    }
     
-    // Check if cell is occupied (visually)
+    // Check if cell is occupied (visually) - look for piece element
     const cell = document.querySelector(`.cell[data-row="${row}"][data-col="${col}"]`);
-    if (cell.hasChildNodes()) return;
+    if (cell.querySelector('.piece')) return;
 
     socket.emit('move', { row, col });
 }
@@ -124,7 +131,8 @@ socket.on('turnChange', (data) => {
 
 socket.on('gameOver', (data) => {
     gameStatus = 'finished';
-    winnerText.textContent = `${data.winner.toUpperCase()} WINS!`;
+    const winnerName = data.winner === myColor ? 'YOU WIN!' : 'YOU LOSE!';
+    winnerText.textContent = winnerName;
     winnerText.style.color = data.winner === 'black' ? 'var(--neon-pink)' : 'var(--neon-blue)';
     winnerModal.classList.remove('hidden');
 });
@@ -173,7 +181,6 @@ function updatePlayerPanel(color, player) {
     const btnReady = document.getElementById(`btn-ready-${color}`);
 
     if (player) {
-        nameEl.textContent = player.name;
         avatarEl.src = player.avatar;
         
         // Reset status text
@@ -182,28 +189,28 @@ function updatePlayerPanel(color, player) {
 
         // Show ready button if it's me AND game is waiting
         if (myId === player.id) {
-            nameEl.textContent = player.name + ' (YOU)';
+            nameEl.textContent = 'YOU';
             if (gameStatus === 'waiting') {
                 btnReady.classList.remove('hidden');
                 if (player.ready) {
                     btnReady.classList.add('ready');
-                    btnReady.textContent = 'READY!';
-                    statusEl.textContent = 'READY';
-                    statusEl.style.color = '#4facfe';
+                    btnReady.textContent = 'READY';
+                    statusEl.textContent = '';
                 } else {
                     btnReady.classList.remove('ready');
-                    btnReady.textContent = 'CLICK TO READY';
-                    statusEl.textContent = 'NOT READY';
+                    btnReady.textContent = 'READY';
+                    statusEl.textContent = '';
                 }
             } else {
                  btnReady.classList.add('hidden');
+                 statusEl.textContent = '';
             }
         } else {
+            nameEl.textContent = 'OPPONENT';
             btnReady.classList.add('hidden');
-            // Show status for opponent
             if (gameStatus === 'waiting') {
-                statusEl.textContent = player.ready ? 'READY' : 'WAITING...';
-                statusEl.style.color = player.ready ? '#4facfe' : '#888';
+                statusEl.textContent = player.ready ? 'READY' : 'WAITING';
+                statusEl.style.color = player.ready ? '#00ff9d' : '#888';
             } else {
                 statusEl.textContent = '';
             }

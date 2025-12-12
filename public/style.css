@@ -1,6 +1,6 @@
 :root {
-    --bg-color: #0b0c15;
-    --board-bg: rgba(255, 255, 255, 0.05);
+    --bg-color: #4a5568;
+    --board-bg: #5a6a7a;
     --grid-line: rgba(0, 243, 255, 0.3);
     --grid-glow: 0 0 5px rgba(0, 243, 255, 0.5);
     --text-primary: #e0e0e0;
@@ -125,19 +125,27 @@ header {
 }
 
 .player-panel {
-    width: 240px;
+    width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
-    padding: 30px;
-    background: rgba(11, 12, 21, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 15px;
+    gap: 15px;
+    padding: 25px 20px;
+    background: rgba(30, 35, 50, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
     backdrop-filter: blur(10px);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
 }
 
 .player-panel.active-turn {
@@ -203,62 +211,70 @@ header {
 }
 
 .name {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
-    color: var(--text-primary);
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
     text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .status {
-    font-size: 14px;
-    height: 20px;
+    font-size: 12px;
+    height: 18px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
 
-.cyber-btn {
-    background: transparent;
-    border: 1px solid var(--neon-blue);
+.btn {
+    background: linear-gradient(135deg, rgba(0, 243, 255, 0.1) 0%, rgba(0, 243, 255, 0.05) 100%);
+    border: 2px solid var(--neon-blue);
     color: var(--neon-blue);
-    padding: 12px 30px;
+    padding: 10px 25px;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 8px;
     font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
     font-weight: bold;
     text-transform: uppercase;
+    letter-spacing: 2px;
     position: relative;
     overflow: hidden;
     transition: all 0.3s;
     box-shadow: 0 0 5px rgba(0, 243, 255, 0.2);
 }
 
-.cyber-btn::before {
+.btn::before {
     content: '';
     position: absolute;
     top: 0;
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.3), transparent);
     transition: 0.5s;
 }
 
-.cyber-btn:hover {
-    background: rgba(0, 243, 255, 0.1);
-    box-shadow: 0 0 20px rgba(0, 243, 255, 0.4);
-    text-shadow: 0 0 5px var(--neon-blue);
+.btn:hover {
+    background: linear-gradient(135deg, rgba(0, 243, 255, 0.2) 0%, rgba(0, 243, 255, 0.1) 100%);
+    box-shadow: 0 0 25px rgba(0, 243, 255, 0.5), inset 0 0 10px rgba(0, 243, 255, 0.1);
+    text-shadow: 0 0 8px var(--neon-blue);
+    transform: translateY(-2px);
 }
 
-.cyber-btn:hover::before {
+.btn:hover::before {
     left: 100%;
 }
 
-.cyber-btn:active {
-    transform: scale(0.95);
+.btn:active {
+    transform: scale(0.95) translateY(0);
 }
 
-.cyber-btn.ready {
+.btn.ready {
+    background: linear-gradient(135deg, rgba(0, 255, 157, 0.2) 0%, rgba(0, 255, 157, 0.1) 100%);
     border-color: var(--jade-green);
     color: var(--jade-green);
-    box-shadow: 0 0 10px rgba(0, 255, 157, 0.2);
+    box-shadow: 0 0 15px rgba(0, 255, 157, 0.3), inset 0 0 10px rgba(0, 255, 157, 0.1);
 }
 
 .hidden {
